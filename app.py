@@ -1,14 +1,16 @@
 import time
 from api.fetch_stocks_list import fetch_stocks_list
 from flask import Flask
+from flask_cors import CORS
 from util import api_util
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/', methods=["POST", "GET"])
 def index():
-    return "This website is used as a Rest API.\n"\
+    return "This website is used as a Rest API.\n" \
            "Created By: <a href=\"https://sprakshith.pythonanywhere.com/aboutUs/\">S P RAKSHITH</a>"
 
 
