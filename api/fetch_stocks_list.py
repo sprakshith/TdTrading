@@ -10,7 +10,7 @@ def fetch_stocks_list():
     scanners = [cp.bullish_marubozo_pattern, cp.bearish_marubozo_pattern, cp.paper_umbrella_pattern,
                 cp.shooting_star_pattern, cp.bullish_engulphing_pattern, cp.bearish_engulphing_pattern,
                 cp.bullish_harami_pattern, cp.bearish_harami_pattern, cp.morning_star_pattern,
-                cp.evening_star_pattern, cp.spinning_top_pattern]
+                cp.evening_star_pattern]
 
     pattern = []
     stock_name = []
