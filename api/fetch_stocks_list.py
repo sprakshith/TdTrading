@@ -25,7 +25,7 @@ def fetch_stocks_list():
         if ticker in ["^NSEI", "^NSEBANK"]:
             ticker_name = ticker
 
-        data = yf.download(tickers=ticker_name, period="1mo")
+        data = yf.download(tickers=ticker_name, period="5d")
         stock = Sdf.retype(data)
         stock_refined = stock[['open', 'high', 'low', 'close', 'volume', 'macd', 'macds', 'rsi_14', 'atr']]
         for scanner in scanners:
