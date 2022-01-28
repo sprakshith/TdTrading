@@ -5,7 +5,7 @@ from stockstats import StockDataFrame as Sdf
 
 
 def fetch_stocks_list():
-    data_nifty = pd.read_csv('../Data/nifty/nifty_50.csv')
+    data_nifty = pd.read_csv('./Data/nifty/nifty_50.csv')
 
     scanners = [cp.bullish_marubozo_pattern, cp.bearish_marubozo_pattern, cp.paper_umbrella_pattern,
                 cp.shooting_star_pattern, cp.bullish_engulphing_pattern, cp.bearish_engulphing_pattern,
@@ -47,6 +47,6 @@ def fetch_stocks_list():
         "Date": date_time
     })
 
-    new_dataframe.to_csv("../Data/result/stocks_results.csv")
+    new_dataframe.to_csv("./Data/result/stocks_results.csv")
 
     return new_dataframe
