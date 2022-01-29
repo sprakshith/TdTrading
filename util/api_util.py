@@ -1,6 +1,7 @@
 from backtracker.test_algorithm import TestStockAlgo
 import candlepattern.candle_pattern as cp
-from util.os_util import create_directory
+from util import os_util
+from constants import file_path_constants as fpc
 import pandas as pd
 import json
 
@@ -20,7 +21,7 @@ pattern_dictionary = {
 
 
 def get_all_tickers():
-    data_nifty = pd.read_csv('./Data/nifty/nifty_50.csv')
+    data_nifty = pd.read_csv(fpc.NIFTY_50_FILE)
     tickers = [ticker for ticker in data_nifty['Symbol']]
 
     return json.dumps(tickers)
@@ -35,12 +36,13 @@ def get_all_patterns():
 
 
 def get_pattern_occurances():
-    df = pd.read_csv('./Data/result/stocks_results.csv')
+    df = pd.read_csv(fpc.STOCKS_RESULT_FILE)
 
     pattern_list = []
     for index in range(len(df)):
         pattern_object = {'Slno': index + 1, 'Date': df.loc[index, 'Date'],
-                          'Name': df.loc[index, 'Name'], 'Pattern': df.loc[index, 'Pattern']}
+                          'Name': df.loc[index, 'Name'], 'Pattern': df.loc[index, 'Pattern'],
+                          'Trend': df.loc[index, 'Trend']}
 
         pattern_list.append(pattern_object)
 
@@ -62,25 +64,21 @@ def fetch_profit_lost_data(ticker_name, pattern_name):
 def test_stock_pattern(stock_ticker, pattern):
     pattern_name = ''.join(pattern.__doc__.split())
 
-    print(f"Started Testing on {stock_ticker} with {pattern_name}")
-
     test_algo = TestStockAlgo(stock_ticker, pattern)
     results = test_algo.test_alogorithm()
     list_to_array = json.dumps(results)
     df = pd.DataFrame(results)
 
     folder_name = stock_ticker.split(".")[0]
+    os_util.create_company_directory(folder_name)
+    os_util.create_pattern_directory(folder_name, pattern_name)
 
-    path = f"./Data/{folder_name}/"
-    create_directory(path)
+    filename_json = os_util.get_profit_loss_json_path(folder_name, pattern_name)
+    filename_csv = os_util.get_profit_loss_csv_path(folder_name, pattern_name)
 
-    path = f"./Data/{folder_name}/{pattern_name}/"
-    create_directory(path)
-
-    filename = f"./Data/{folder_name}/{pattern_name}/ProfitAndLoss.json"
-    file = open(filename, 'w')
+    file = open(filename_json, 'w')
     file.write(list_to_array)
 
-    df.to_csv(f"./Data/{folder_name}/{pattern_name}/ProfitAndLoss.csv")
+    df.to_csv(filename_csv)
 
     return list_to_array, df

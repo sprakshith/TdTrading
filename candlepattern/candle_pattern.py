@@ -295,9 +295,8 @@ def morning_star_pattern(stocks):
                 if (previous_open < previous_1_close) and (previous_close < previous_1_close):
                     if (current_open > previous_open) and (current_open > previous_close):
                         if current_close > current_open:
-                            if current_close > current_open:
-                                if is_downward_trend(stocks, current_date):
-                                    dates_list.append(current_date)
+                            if is_downward_trend(stocks, current_date):
+                                dates_list.append(current_date)
         except Exception as e:
             print(e)
 

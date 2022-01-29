@@ -1,0 +1,6 @@
+NIFTY_50_FILE = "./Data/nifty/nifty_50.csv"
+STOCKS_RESULT_FILE = "./Data/result/stocks_results.csv"
+STOCK_COMPANY_FOLDER = "./Data/###FOLDER_NAME###/"
+STOCK_PATTERN_FOLDER = "./Data/###FOLDER_NAME###/###PATTERN_NAME###/"
+PROFIT_LOSS_JSON = "./Data/###FOLDER_NAME###/###PATTERN_NAME###/ProfitAndLoss.json"
+PROFIT_LOSS_CSV = "./Data/###FOLDER_NAME###/###PATTERN_NAME###/ProfitAndLoss.csv"
